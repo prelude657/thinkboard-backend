@@ -4,12 +4,16 @@ import express from "express";
 import connectDB from "./config/db.js";
 import noteRoutes from "./routes/notesRoutes.js";
 import ratelimiter from "./middleware/rateLimiter.js";
+import cors from "cors"
 
 const app = express();
 
-
+app.use(cors({
+  origin:"http://localhost:5173"
+}));
 app.use(express.json());
 app.use (ratelimiter);
+
 
 // 👇 NOTES ROUTES
 app.use("/api/notes", noteRoutes);
